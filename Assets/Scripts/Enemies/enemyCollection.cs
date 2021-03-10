@@ -52,6 +52,7 @@ namespace EnemyReferenceTable
         // Constructor.
         public EnemyCollection()
         {
+			// Enemy List Init
             enemyList.Add(0, enemy0);
         }
 
