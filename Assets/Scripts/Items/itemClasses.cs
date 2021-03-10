@@ -305,8 +305,8 @@ namespace Items
 
             itemName = "Suspiciously Unnamed Item";
             itemDesc = @"For whatever reason, this item has no description.
-                              Please report this to your nearest overworked dev.
-                              Thank you.";
+                         Please report this to your nearest overworked dev.
+                         Thank you.";
             itemRarity = ItemRarityTier.Debug;
 
             isSellable = false;

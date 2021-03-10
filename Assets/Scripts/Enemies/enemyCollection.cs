@@ -52,11 +52,11 @@ namespace EnemyReferenceTable
         // Constructor.
         public EnemyCollection()
         {
-			// Enemy List Init
+            // Enemy List Init.
             enemyList.Add(0, enemy0);
         }
 
-        // Enemy Definitions.
+        // Enemy Definitions.   
 
         // #0000: Debug Enemy (Debug)
         // HP: 20 | P.Attack: 1 | M.Attack: 1 | P.Defense: 0 | M.Defense: 0

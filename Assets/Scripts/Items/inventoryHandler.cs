@@ -7,7 +7,7 @@ using Items;
 
 namespace Inventory
 {
-    public struct Constants
+    public readonly struct Constants
     {
         public const int ITEMS_PER_PAGE = 25;
         public const int MAX_PAGES = 20;
