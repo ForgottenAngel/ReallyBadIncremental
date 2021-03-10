@@ -26,6 +26,15 @@
         Debug = -1,
         Helmet = 0,
         Overalls = 1,
-        Shoes = 2
+        Shoes = 2,
+        MainHand = 10
+    }
+
+    public enum ConsumableType
+    {
+        Debug = -1,
+        Heal = 0,
+        Buff = 1,
+        Debuff = 2
     }
 }
