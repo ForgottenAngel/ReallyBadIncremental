@@ -43,6 +43,8 @@ namespace ItemReferenceTable
         }
     }
 
+    // Equipment Structs
+    #region Equipment Structs
     public readonly struct statRequirements
     {
         public double strR { get; }
@@ -137,10 +139,42 @@ namespace ItemReferenceTable
             specialEquipStats = ss;
         }
     }
+    #endregion
+
+    // Consumable Structs
+    #region Consumable Structs
+    public readonly struct healItemInfo
+    {
+        public ConsumableType consType { get; }
+
+        public int levelReq { get; }
+        public baseItemInfo itemInfo { get; }
+
+        public BigDouble hpHealAmount { get; }
+        public bool hpPercentHeal { get; }
+        public BigDouble mpHealAmount { get; }
+        public bool mpPercentHeal { get; }
+
+        // Constructor.
+        public healItemInfo(int level, baseItemInfo info, BigDouble hpHeal, bool hpPerc, BigDouble mpHeal, bool mpPerc)
+        {
+            consType = ConsumableType.Heal;
+
+            levelReq = level;
+            itemInfo = info;
+
+            hpHealAmount = hpHeal;
+            hpPercentHeal = hpPerc;
+            mpHealAmount = mpHeal;
+            mpPercentHeal = mpPerc;
+        }
+    }
+    #endregion
 
     public class itemCollection
     {
         Dictionary<int, equipItemInfo> equipmentList = new Dictionary<int, equipItemInfo>();
+        Dictionary<int, healItemInfo> healItemList = new Dictionary<int, healItemInfo>();
 
         // Construtor
         public itemCollection()
@@ -151,10 +185,20 @@ namespace ItemReferenceTable
 
         // Item Definitions
 
+        // Healing Consumable Definitions
+
+        // #0000: THE Mountain Dew
+        // Level Req: 1 | Rarity: Debug | Unsellable | Value: 420g 
+        // Heals >> HP: 110% | MP: 110%
+        healItemInfo healItem0 = new healItemInfo(1, new baseItemInfo(null, 0, ItemCategory.Consumable, "THE Mountain Dew",
+                                                                      "The fabled dew from the peak of the mountain.",
+                                                                      ItemRarityTier.Debug, false, 420),
+                                                  110, true, 110, true);
+
         // Equipment Definitions.
 
         // #0000: ??? Weapon (Main Hand)
-        // Item ID: 0 | Rarity: Debug | Unsellable | Value: 42069g
+        // Level Req: 1 | Rarity: Debug | Unsellable | Value: 42069g
         // Requires >> Str: 1 | Int: 1 | Con: 1 | Wil: 1
         // Provides >> P.Atk: 2 | M.Atk: 2 | P.Def: 0 | M.Def: 0 | Str: 1 | Int: 1 | Con: 1 | Wil: 1
         //          >> Crit.Rate: 10% | Crit.Dmg: 0% | Accuracy: 0 | Hit Rate: 50% | Avoid: 0 | Dodge: 10% | Block: 15%
