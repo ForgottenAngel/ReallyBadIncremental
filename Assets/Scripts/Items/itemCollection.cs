@@ -10,7 +10,7 @@ using Items;
 
 namespace ItemReferenceTable
 {
-    // Informational Structs to hold massive quantities of RO data.
+    // Informational Struct to hold massive quantities of RO data.
     public readonly struct baseItemInfo
     {
         public Image icon { get; }
@@ -127,8 +127,8 @@ namespace ItemReferenceTable
         public specialStats specialEquipStats { get; }
 
         // Construtor.
-        public equipItemInfo(EquipmentSlot es, int level, ref baseItemInfo info,
-                             ref statRequirements sr, ref baseStats bs, ref specialStats ss)
+        public equipItemInfo(EquipmentSlot es, int level, baseItemInfo info,
+                             statRequirements sr, baseStats bs, specialStats ss)
         {
             equipSlot = es;
 
@@ -156,7 +156,7 @@ namespace ItemReferenceTable
         public bool mpPercentHeal { get; }
 
         // Constructor.
-        public healItemInfo(int level, ref baseItemInfo info, BigDouble hpHeal, bool hpPerc, BigDouble mpHeal, bool mpPerc)
+        public healItemInfo(int level, baseItemInfo info, BigDouble hpHeal, bool hpPerc, BigDouble mpHeal, bool mpPerc)
         {
             consType = ConsumableType.Heal;
 
@@ -173,42 +173,55 @@ namespace ItemReferenceTable
 
     public class itemCollection
     {
-        readonly Dictionary<int, equipItemInfo> equipmentList = new Dictionary<int, equipItemInfo>();
-        readonly Dictionary<int, healItemInfo> healItemList = new Dictionary<int, healItemInfo>();
+        public readonly Dictionary<int, equipItemInfo> equipmentList;
+        public readonly Dictionary<int, healItemInfo> healItemList;
 
         // Construtor
         public itemCollection()
         {
-            // Healing Item List Init.
-            healItemList.Add(0, healItem0);
-
-            // Equipment List Init.
-            equipmentList.Add(0, equip0);
+            defineHealingConsumables(out healItemList);
+            defineEquipment(out equipmentList);
         }
 
         // Item Definitions
+        private void defineHealingConsumables(out Dictionary<int, healItemInfo> hIL)
+        {
+            hIL = new Dictionary<int, healItemInfo>();
 
-        // Healing Consumable Definitions
+            // Temporary lists to hold partial structs.
+            List<string> hItemDesc = new List<string>();
+            List<baseItemInfo> bHItem = new List<baseItemInfo>();
 
-        // #0000: THE Mountain Dew
-        // Level Req: 1 | Rarity: Debug | Unsellable | Value: 420g 
-        // Heals >> HP: 110% | MP: 110%
-        static readonly string hItemDesc0 = "The fabled dew from the peak of the mountain. It fills you with an untold power.";
-        static baseItemInfo bHItem0 = new baseItemInfo(null, 0, ItemCategory.Consumable, "THE Mountain Dew", hItemDesc0, ItemRarityTier.Debug, false, 420);
-        static healItemInfo healItem0 = new healItemInfo(1, ref bHItem0, 110, true, 110, true);
+            // #0000: THE Mountain Dew
+            // Level Req: 1 | Rarity: Debug | Unsellable | Value: 420g 
+            // Heals >> HP: 110% | MP: 110%
+            hItemDesc.Add("The fabled dew from the peak of the mountain. It fills you with an untold power.");
+            bHItem.Add(new baseItemInfo(null, 0, ItemCategory.Consumable, "THE Mountain Dew", hItemDesc[0], ItemRarityTier.Debug, false, 420));
+            hIL.Add(0, new healItemInfo(0, bHItem[0], 110, true, 110, true));
+        }
 
-        // Equipment Definitions.
+        private void defineEquipment(out Dictionary<int, equipItemInfo> eL)
+        {
+            eL = new Dictionary<int, equipItemInfo>();
 
-        // #0000: ??? Weapon (Main Hand)
-        // Level Req: 1 | Rarity: Debug | Unsellable | Value: 42069g
-        // Requires >> Str: 1 | Int: 1 | Con: 1 | Wil: 1
-        // Provides >> P.Atk: 2 | M.Atk: 2 | P.Def: 0 | M.Def: 0 | Str: 1 | Int: 1 | Con: 1 | Wil: 1
-        //          >> Crit.Rate: 10% | Crit.Dmg: 0% | Accuracy: 0 | Hit Rate: 50% | Avoid: 0 | Dodge: 10% | Block: 15%
-        static readonly string equipDesc0 = "A spooky unknown weapon...or so you think...";
-        static baseItemInfo bEquip0 = new baseItemInfo(null, 0, ItemCategory.Equipment, "??? Weapon", equipDesc0, ItemRarityTier.Debug, false, 42069);
-        static statRequirements srEquip0 = new statRequirements(1, 1, 1, 1);
-        static baseStats bsEquip0 = new baseStats(2, 2, 0, 0, 1, 1, 1, 1);
-        static specialStats ssEquip0 = new specialStats(10f, 0f, 0, 50f, 0, 10f, 15f);
-        static equipItemInfo equip0 = new equipItemInfo(EquipmentSlot.MainHand, 1, ref bEquip0, ref srEquip0, ref bsEquip0, ref ssEquip0);
+            // Temporary lists to hold partial structs.
+            List<string> equipDesc = new List<string>();
+            List<baseItemInfo> bEquip = new List<baseItemInfo>();
+            List<statRequirements> srEquip = new List<statRequirements>();
+            List<baseStats> bsEquip = new List<baseStats>();
+            List<specialStats> ssEquip = new List<specialStats>();
+
+            // #0000: ??? Weapon (Main Hand)
+            // Level Req: 1 | Rarity: Debug | Unsellable | Value: 42069g
+            // Requires >> Str: 1 | Int: 1 | Con: 1 | Wil: 1
+            // Provides >> P.Atk: 2 | M.Atk: 2 | Str: 1 | Int: 1 | Con: 1 | Wil: 1
+            //          >> Crit.Rate: 10% | Hit Rate: 50% | Dodge: 10% | Block: 15%
+            equipDesc.Add("A spooky unknown weapon...or so you think...");
+            bEquip.Add(new baseItemInfo(null, 0, ItemCategory.Equipment, "??? Weapon", equipDesc[0], ItemRarityTier.Debug, false, 42069));
+            srEquip.Add(new statRequirements(1, 1, 1, 1));
+            bsEquip.Add(new baseStats(2, 2, 0, 0, 1, 1, 1, 1));
+            ssEquip.Add(new specialStats(10f, 0f, 0, 50f, 0, 10f, 15f));
+            eL.Add(0, new equipItemInfo(EquipmentSlot.MainHand, 1, bEquip[0], srEquip[0], bsEquip[0], ssEquip[0]));
+        }
     }
 }
