@@ -3,6 +3,7 @@
 using UnityEngine;
 
 using BreakInfinity;
+using Effects;
 
 namespace Character
 {
