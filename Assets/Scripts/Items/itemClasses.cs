@@ -5,6 +5,7 @@ using UnityEngine.UI;   // Handles Image type.
 
 using BreakInfinity;
 using ItemEnumTables;
+using ItemReferenceTable;
 
 namespace Items
 {
@@ -348,6 +349,47 @@ namespace Items
         public specialStatGains _equipSpecialStats
         {
             get { return equipSpecialStats; }
+        }
+
+        // Implicit conversion from info to item for item generation.
+        public static implicit operator equipmentItem(equipItemInfo info)
+        {
+            equipmentItem item = new equipmentItem();
+
+            // Set basic info.
+            item.equipSlot = info.equipSlot;
+            item.levelReq = info.levelReq;
+
+            item.icon = info.itemInfo.icon;
+
+            item.itemID = info.itemInfo.itemID;
+            item.itemCat = info.itemInfo.itemCat;
+
+            item.itemName = info.itemInfo.itemName;
+            item.itemDesc = info.itemInfo.itemDesc;
+            item.itemRarity = info.itemInfo.itemRarity;
+
+            item.isSellable = info.itemInfo.isSellable;
+            item.itemValue = info.itemInfo.itemValue;
+
+            // Set Equip Requiremenst
+            item.equipReqs.set(info.equipReqs.strR, info.equipReqs.intR, info.equipReqs.conR, info.equipReqs.wilR);
+
+            // Set Equip Stats
+            item.baseEquipStats.setAtk(info.baseEquipStats.pAtkG, info.baseEquipStats.mAtkG);
+            item.baseEquipStats.setDef(info.baseEquipStats.pDefG, info.baseEquipStats.mDefG);
+            item.baseEquipStats.setStats(info.baseEquipStats.strG, info.baseEquipStats.intG, info.baseEquipStats.conG, info.baseEquipStats.wilG);
+
+            // Set Equip Special Stats
+            item.equipSpecialStats._critRateG = info.specialEquipStats.critRateG;
+            item.equipSpecialStats._critDamageG = info.specialEquipStats.critDamageG;
+            item.equipSpecialStats._accG = info.specialEquipStats.accG;
+            item.equipSpecialStats._hitRateG = info.specialEquipStats.hitRateG;
+            item.equipSpecialStats._avoidG = info.specialEquipStats.avoidG;
+            item.equipSpecialStats._dodgeG = info.specialEquipStats.dodgeG;
+            item.equipSpecialStats._blockG = info.specialEquipStats.blockG;
+
+            return item;
         }
     }
 }
