@@ -392,4 +392,107 @@ namespace Items
             return item;
         }
     }
+
+    // Defines the consumable item class.
+    public class healItem : itemObject
+    {
+        private ConsumableType type;
+
+        private int levelReq;
+        private BigDouble hpHealAmount;
+        private bool hpPercentHeal;
+        private BigDouble mpHealAmount;
+        private bool mpPercentHeal;
+
+        // Constructor
+        public healItem()
+        {
+            // Intialize itemObject variables.
+            icon = null;
+
+            itemID = 0;
+            itemCat = ItemCategory.Consumable;
+
+            itemName = "Suspiciously Unnamed Item";
+            itemDesc = @"For whatever reason, this item has no description.
+                         Please report this to your nearest overworked dev.
+                         Thank you.";
+            itemRarity = ItemRarityTier.Debug;
+
+            isSellable = false;
+            itemValue = 0;
+
+            isLocked = false;
+
+            // Initialize healItem variables.
+            type = ConsumableType.Heal;
+
+            levelReq = 0;
+            hpHealAmount = 1;
+            hpPercentHeal = false;
+            mpHealAmount = 1;
+            mpPercentHeal = false;
+        }
+
+        // Getters and Setters
+        public ConsumableType _type
+        {
+            get { return type; }
+        }
+
+        public int _levelReq
+        {
+            get { return levelReq; }
+        }
+
+        public BigDouble _hpHealAmount
+        {
+            get { return hpHealAmount; }
+        }
+
+        public bool _hpPercentHeal
+        {
+            get { return hpPercentHeal; }
+        }
+
+        public BigDouble _mpHealAmount
+        {
+            get { return mpHealAmount; }
+        }
+
+        public bool _mpPercentHeal
+        {
+            get { return mpPercentHeal; }
+        }
+
+        public static implicit operator healItem(healItemInfo info)
+        {
+            healItem item = new healItem();
+
+            // Set basic info.
+            item.icon = info.itemInfo.icon;
+
+            item.itemID = info.itemInfo.itemID;
+            item.itemCat = info.itemInfo.itemCat;
+
+            item.itemName = info.itemInfo.itemName;
+            item.itemDesc = info.itemInfo.itemDesc;
+            item.itemRarity = info.itemInfo.itemRarity;
+
+            item.isSellable = info.itemInfo.isSellable;
+            item.itemValue = info.itemInfo.itemValue;
+
+            // Set healItem info.
+            item.type = info.consType;
+
+            item.levelReq = info.levelReq;
+            item.hpHealAmount = info.hpHealAmount;
+            item.hpPercentHeal = info.hpPercentHeal;
+            item.mpHealAmount = info.mpHealAmount;
+            item.mpPercentHeal = info.mpPercentHeal;
+
+            return item;
+        }
+
+    }
 }
