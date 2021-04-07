@@ -321,10 +321,10 @@ namespace Character
         private int level;
         private string charName;
 
-        private basicStats baseStats;
-        private derivativeStats derivedStats;
-        private specializedStats specialStats;
-        private statMultipliers statMultis;
+        public basicStats baseStats;
+        public derivativeStats derivedStats;
+        public specializedStats specialStats;
+        public statMultipliers statMultis;
 
         // Character Inventory.
         private BigDouble money;
@@ -339,7 +339,13 @@ namespace Character
             level = 1;
             charName = "[REDACTED]";
 
-            // Initialize Derived Stats
+            // Initialize Stat Structures
+            baseStats = new basicStats();
+            derivedStats = new derivativeStats();
+            specialStats = new specializedStats();
+            statMultis = new statMultipliers();
+
+            // Intialize Derived Stats
             updateStats();
         }
 
