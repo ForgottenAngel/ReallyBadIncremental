@@ -339,7 +339,13 @@ namespace Character
             level = 1;
             charName = "[REDACTED]";
 
-            // Initialize Derived Stats
+            // Initialize Stat Structures
+            baseStats = new basicStats();
+            derivedStats = new derivativeStats();
+            specialStats = new specializedStats();
+            statMultis = new statMultipliers();
+
+            // Intialize Derived Stats
             updateStats();
         }
 
