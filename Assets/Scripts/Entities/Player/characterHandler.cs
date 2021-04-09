@@ -315,10 +315,14 @@ namespace Character
         }
     }
 
-    public sealed class characterHandler : MonoBehaviour
+    public sealed class characterHandler
     {
         // Basic Character Stats.
         private int level;
+        private BigDouble currentEXP;
+        private BigDouble toNextLevelEXP;
+        private BigDouble totalEXP;
+
         private string charName;
 
         public basicStats baseStats;
@@ -337,6 +341,9 @@ namespace Character
         public characterHandler()
         {
             level = 1;
+            currentEXP = 0;
+            toNextLevelEXP = 102;
+
             charName = "[REDACTED]";
 
             // Initialize Stat Structures
@@ -360,5 +367,67 @@ namespace Character
             derivedStats._totalWil = baseStats._bWil * statMultis._wilM;
         }
 
+        // Function to add EXP to character.
+        public void incrementEXP(BigDouble expGained)
+        {
+            currentEXP += expGained;
+            totalEXP += expGained;
+
+            updateLevel();
+        }
+
+        // Handles Level Up Math
+        public void updateLevel()
+        {
+            while (currentEXP >= toNextLevelEXP)
+            {
+                level += 1;
+                currentEXP -= toNextLevelEXP;
+
+                // EXP tNL Formula:
+                // EXPtNL = floor[100 * (1.023 ^ level) * (level ^ 1.02)]
+                toNextLevelEXP = BigDouble.Floor(100 * BigDouble.Pow(1.023, level) * BigDouble.Pow(level, 1.02));
+            }
+        }
+
+        #region characterHandler Getters and Setters
+        // Getters and Setters
+        public int _level
+        {
+            get { return level; }
+        }
+
+        public BigDouble _currentEXP
+        {
+            get { return currentEXP; }
+        }
+
+        public BigDouble _toNextLevelEXP
+        {
+            get { return toNextLevelEXP; }
+        }
+
+        public BigDouble _totalEXP
+        {
+            get { return totalEXP; }
+        }
+
+        public string _charname
+        {
+            get { return charName; }
+            set { charName = value; }
+        }
+
+        public BigDouble _money
+        {
+            get { return money; }
+        }
+
+        public bool _inCombat
+        {
+            get { return inCombat; }
+            set { inCombat = value; }
+        }
+        #endregion
     }
 }
