@@ -352,6 +352,7 @@ namespace Character
 
         // Character Inventory.
         private BigDouble money;
+        private Dictionary<EquipmentSlot, equipmentItem> equipment;
 
         // Character Flags.
         private bool inCombat;
@@ -376,9 +377,27 @@ namespace Character
 
             // Initialize Inventory
             money = 0;
+            equipment = new Dictionary<EquipmentSlot, equipmentItem>();
 
             // Intialize Derived Stats
             updateStats();
+        }
+
+        // Handle Player Equipment
+        public void changeEquip(ref equipmentItem item)
+        {
+            equipmentItem equippedItem = new equipmentItem(item);
+
+            if (equipment.ContainsKey(item._equipSlot))
+            {
+                item.copy(equipment[item._equipSlot]);
+                equipment.Remove(item._equipSlot);
+            } else
+            {
+                item = null;
+            }
+
+            equipment.Add(equippedItem._equipSlot, equippedItem);
         }
 
         // Updates the derived stats.

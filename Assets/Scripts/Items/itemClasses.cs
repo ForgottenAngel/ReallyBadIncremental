@@ -26,6 +26,15 @@ namespace Items
             wilR = 0;
         }
 
+        // Copy Constructor
+        public statReqs(statReqs reqs)
+        {
+            strR = reqs.strR;
+            intR = reqs.intR;
+            conR = reqs.conR;
+            wilR = reqs.wilR;
+        }
+
         // Functions
         public void set(double s, double i, double c, double w)
         {
@@ -83,6 +92,21 @@ namespace Items
             intG = 0;
             conG = 0;
             wilG = 0;
+        }
+        
+        // Copy Constructor
+        public baseStatGains(baseStatGains gains)
+        {
+            pAtkG = gains.pAtkG;
+            mAtkG = gains.mAtkG;
+
+            pDefG = gains.pDefG;
+            mDefG = gains.mDefG;
+
+            strG = gains.strG;
+            intG = gains.intG;
+            conG = gains.conG;
+            wilG = gains.wilG;
         }
 
         // General Functions.
@@ -168,6 +192,17 @@ namespace Items
             avoidG = 0;
             dodgeG = 0.00f;
             blockG = 0.00f;
+        }
+
+        public specialStatGains(specialStatGains gains)
+        {
+            critRateG = gains.critRateG;
+            critDamageG = gains.critDamageG;
+            accG = gains.accG;
+            hitRateG = gains.hitRateG;
+            avoidG = gains.avoidG;
+            dodgeG = gains.dodgeG;
+            blockG = gains.blockG;
         }
 
         // Getters and Setters
@@ -321,6 +356,47 @@ namespace Items
             equipReqs = new statReqs();
             baseEquipStats = new baseStatGains();
             equipSpecialStats = new specialStatGains();
+        }
+
+        // Copy Constructor
+        public equipmentItem(equipmentItem item)
+        {
+            equipItemObjValCopy(item);
+            equipReqs = new statReqs(item.equipReqs);
+            baseEquipStats = new baseStatGains(item.baseEquipStats);
+            equipSpecialStats = new specialStatGains(item.equipSpecialStats);
+        }
+
+        // Copies WITHOUT creating a new instance.
+        public void copy(equipmentItem item)
+        {
+            equipItemObjValCopy(item);
+            equipReqs = item.equipReqs;
+            baseEquipStats = item.baseEquipStats;
+            equipSpecialStats = item.equipSpecialStats;
+        }
+
+        // Seperate basic var copy to reuse code.
+        private void equipItemObjValCopy(equipmentItem item)
+        {
+            // Copy itemObject variables.
+            icon = item.icon;
+
+            itemID = item.itemID;
+            itemCat = item.itemCat;
+
+            itemName = item.itemName;
+            itemDesc = item.itemDesc;
+            itemRarity = item.itemRarity;
+
+            isSellable = item.isSellable;
+            itemValue = item.itemValue;
+
+            isLocked = item.isLocked;
+
+            // Copy equipmentItem variables.
+            levelReq = item.levelReq;
+            equipSlot = item.equipSlot;
         }
 
         // equipmentItem getters and setters.
