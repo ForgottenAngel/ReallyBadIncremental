@@ -5,6 +5,7 @@ using UnityEngine.UI;   // Handles Image type.
 
 using BreakInfinity;
 using EnemyEnumTables;
+using EnemyReferenceTable;
 
 namespace Enemy
 {
@@ -79,7 +80,7 @@ namespace Enemy
         private int level;
         private string name;
 
-        private basicStats enemyStats = new basicStats();
+        public basicStats enemyStats;
         private EnemyCategory enemyType;
 
         // Constructor
@@ -88,32 +89,45 @@ namespace Enemy
             level = 1;
             name = "MISSINGNO.";
 
+            enemyStats = new basicStats();
             enemyType = EnemyCategory.Debug;
+        }
+
+        public static implicit operator enemyHandler(enemyInfo info)
+        {
+            enemyHandler enemy = new enemyHandler();
+
+            enemy.icon = info.icon;
+
+            enemy.level = info.level;
+            enemy.name = info.name;
+
+            enemy.enemyStats.set(info.enemyStats.maxHP, info.enemyStats.pAttack, info.enemyStats.mAttack,
+                                 info.enemyStats.pDefense, info.enemyStats.mDefense);
+            enemy.enemyType = info.enemyType;
+
+            return enemy;
         }
 
         // Getters and Setters
         public Image _icon
         {
             get { return icon; }
-            set { icon = value; }
         }
 
         public int _level
         {
             get { return level; }
-            set { level = value; }
         }
 
         public string _name
         {
             get { return name; }
-            set { name = value; }
         }
 
         public EnemyCategory _enemyType
         {
             get { return enemyType; }
-            set { enemyType = value; }
         }
     }
 }
