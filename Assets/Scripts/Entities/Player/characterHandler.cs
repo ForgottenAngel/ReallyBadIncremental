@@ -4,6 +4,9 @@ using UnityEngine;
 
 using BreakInfinity;
 using Effects;
+using StatEnumTables;
+using Items;
+using ItemEnumTables;
 
 namespace Character
 {
@@ -70,7 +73,9 @@ namespace Character
     public class derivativeStats
     {
         private BigDouble maxHP;
+        private BigDouble currHP;
         private BigDouble maxMP;
+        private BigDouble currMP;
         private BigDouble pAttack;
         private BigDouble mAttack;
         private BigDouble pDefense;
@@ -85,7 +90,9 @@ namespace Character
         public derivativeStats()
         {
             maxHP = 200;
+            currHP = maxHP;
             maxMP = 50;
+            currMP = maxMP;
             pAttack = 10;
             mAttack = 10;
             pDefense = 10;
@@ -104,10 +111,22 @@ namespace Character
             set { maxHP = value; }
         }
 
+        public BigDouble _currHP
+        {
+            get { return currHP; }
+            set { currHP = value; }
+        }
+
         public BigDouble _maxMP
         {
             get { return maxMP; }
             set { maxMP = value; }
+        }
+
+        public BigDouble _currMP
+        {
+            get { return currMP; }
+            set { currMP = value; }
         }
 
         public BigDouble _pAttack
@@ -329,6 +348,7 @@ namespace Character
         public derivativeStats derivedStats;
         public specializedStats specialStats;
         public statMultipliers statMultis;
+        private long statPoints;
 
         // Character Inventory.
         private BigDouble money;
@@ -343,14 +363,19 @@ namespace Character
             level = 1;
             currentEXP = 0;
             toNextLevelEXP = 102;
+            totalEXP = 0;
 
             charName = "[REDACTED]";
 
-            // Initialize Stat Structures
+            // Initialize Stats
             baseStats = new basicStats();
             derivedStats = new derivativeStats();
             specialStats = new specializedStats();
             statMultis = new statMultipliers();
+            statPoints = 0;
+
+            // Initialize Inventory
+            money = 0;
 
             // Intialize Derived Stats
             updateStats();
@@ -365,6 +390,16 @@ namespace Character
             derivedStats._totalInt = baseStats._bInt * statMultis._intM;
             derivedStats._totalCon = baseStats._bCon * statMultis._conM;
             derivedStats._totalWil = baseStats._bWil * statMultis._wilM;
+
+            if (derivedStats._currHP > derivedStats._maxHP)
+            {
+                derivedStats._currHP = derivedStats._maxHP;
+            }
+
+            if (derivedStats._currMP > derivedStats._maxMP)
+            {
+                derivedStats._currMP = derivedStats._maxMP;
+            }
         }
 
         // Function to add EXP to character.
@@ -387,6 +422,33 @@ namespace Character
                 // EXP tNL Formula:
                 // EXPtNL = floor[100 * (1.023 ^ level) * (level ^ 1.02)]
                 toNextLevelEXP = BigDouble.Floor(100 * BigDouble.Pow(1.023, level) * BigDouble.Pow(level, 1.02));
+            }
+        }
+
+        // Handles Stat Distribution
+        public void applyStatPoints(StatType type, long amount)
+        {
+            if (amount > statPoints || amount <= 0)
+            {
+                // Place a warning popup here or something.
+            } else {
+                switch (type)
+                {
+                    case StatType.Strength:
+                        baseStats._bStr += amount;
+                        break;
+                    case StatType.Intelligence:
+                        baseStats._bInt += amount;
+                        break;
+                    case StatType.Constitution:
+                        baseStats._bCon += amount;
+                        break;
+                    case StatType.Willpower:
+                        baseStats._bWil += amount;
+                        break;
+                }
+
+                statPoints -= amount;
             }
         }
 
@@ -416,6 +478,11 @@ namespace Character
         {
             get { return charName; }
             set { charName = value; }
+        }
+
+        public long _statPoints
+        {
+            get { return statPoints; }
         }
 
         public BigDouble _money
