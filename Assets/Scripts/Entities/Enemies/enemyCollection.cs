@@ -45,22 +45,27 @@ namespace EnemyReferenceTable
         }
     }
 
-    public class EnemyCollection
+    public class enemyCollection
     {
-        Dictionary<int, enemyInfo> enemyList = new Dictionary<int, enemyInfo>();
+        public Dictionary<int, enemyInfo> enemyList;
 
         // Constructor.
-        public EnemyCollection()
+        public enemyCollection()
         {
-            // Enemy List Init.
-            enemyList.Add(0, enemy0);
+            defineEnemies(out enemyList);
         }
 
-        // Enemy Definitions.   
+        public void defineEnemies(out Dictionary<int, enemyInfo> eL)
+        {
+            eL = new Dictionary<int, enemyInfo>();
 
-        // #0000: Debug Enemy (Debug)
-        // HP: 20 | P.Attack: 1 | M.Attack: 1 | P.Defense: 0 | M.Defense: 0
-        enemyInfo enemy0 = new enemyInfo(null, 1, "Debug Enemy", EnemyCategory.Debug, 
-                                         new enemyStatValues(20, 1, 1, 0, 0));
+            // Enemy Definitions.   
+
+            // #0000: Debug Enemy (Debug)
+            // HP: 20 | P.Attack: 1 | M.Attack: 1 | P.Defense: 0 | M.Defense: 0
+            enemyInfo enemy0 = new enemyInfo(null, 1, "Debug Enemy", EnemyCategory.Debug,
+                                             new enemyStatValues(20, 1, 1, 0, 0));
+            enemyList.Add(0, enemy0);
+        }
     }
 }
