@@ -453,15 +453,18 @@ namespace Character
                 // EXP tNL Formula:
                 // EXPtNL = floor[100 * (1.023 ^ level) * (level ^ 1.02)]
                 toNextLevelEXP = BigDouble.Floor(100 * BigDouble.Pow(1.023, level) * BigDouble.Pow(level, 1.02));
+
+                statPoints += 5;
             }
         }
 
         // Handles Stat Distribution
-        public void applyStatPoints(StatType type, long amount)
+        public bool applyStatPoints(StatType type, long amount)
         {
             if (amount > statPoints || amount <= 0)
             {
                 // Place a warning popup here or something.
+                return false;
             } else {
                 switch (type)
                 {
@@ -480,6 +483,7 @@ namespace Character
                 }
 
                 statPoints -= amount;
+                return true;
             }
         }
 
