@@ -9,7 +9,7 @@ public class displayBarHP : MonoBehaviour
     Text hpl;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         hpl = GetComponent<Text> ();
     }
