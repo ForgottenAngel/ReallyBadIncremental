@@ -41,11 +41,12 @@ namespace Abilities
         public string name { get; }
         public string desc { get; }
         public bool toSelf { get; }
+        public bool isHeal { get; }
 
         public abilityScaling scaling {get;}
 
         public abilityInfo(Image ico, AbilityType t, int aID, string n, string d, bool self,
-                           abilityScaling scale)
+                           bool heal, abilityScaling scale)
         {
             icon = ico;
             type = t;
@@ -54,6 +55,7 @@ namespace Abilities
             name = n;
             desc = d;
             toSelf = self;
+            isHeal = heal;
 
             scaling = scale;
         }
@@ -92,7 +94,7 @@ namespace Abilities
                 return 2;
             };
 
-            aIL.Add(0, new abilityInfo(null, AbilityType.Active, 0, "Throw Rock", aDesc[0], false, aScal[0]));
+            aIL.Add(0, new abilityInfo(null, AbilityType.Active, 0, "Throw Rock", aDesc[0], false, false, aScal[0]));
             aL.Add(0, ability0);
 
             // #0001: Get Hype (Buff)
@@ -115,7 +117,7 @@ namespace Abilities
                 return effVals;
             };
 
-            aIL.Add(1, new abilityInfo(null, AbilityType.Buff, 1, "Get Hype", aDesc[1], true, aScal[1]));
+            aIL.Add(1, new abilityInfo(null, AbilityType.Buff, 1, "Get Hype", aDesc[1], true, true, aScal[1]));
             aL.Add(1, ability1);
             aEL.Add(1, aEff1);
 
@@ -130,7 +132,7 @@ namespace Abilities
                 return 5;
             };
 
-            aIL.Add(2, new abilityInfo(null, AbilityType.Healing, 2, "Crack Your Back", aDesc[2], true, aScal[2]));
+            aIL.Add(2, new abilityInfo(null, AbilityType.Healing, 2, "Crack Your Back", aDesc[2], true, true, aScal[2]));
             aL.Add(2, ability2);
 
             // #0003: Armor Crash (Debuff)
@@ -153,7 +155,7 @@ namespace Abilities
                 return effVals;
             };
 
-            aIL.Add(3, new abilityInfo(null, AbilityType.Debuff, 3, "Armor Crash", aDesc[3], false, aScal[3]));
+            aIL.Add(3, new abilityInfo(null, AbilityType.Debuff, 3, "Armor Crash", aDesc[3], false, false, aScal[3]));
             aL.Add(3, ability3);
             aEL.Add(3, aEff3);
         }
