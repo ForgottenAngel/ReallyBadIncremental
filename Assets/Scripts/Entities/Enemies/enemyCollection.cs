@@ -34,14 +34,18 @@ namespace EnemyReferenceTable
         public string name { get; }
         public EnemyCategory enemyType { get; }
         public enemyStatValues enemyStats { get; }
+        public BigDouble exp { get; }
+        public List<int> abilities { get; }
 
-        public enemyInfo(Image i, int lvl, string n, EnemyCategory type, enemyStatValues eSV)
+        public enemyInfo(Image i, int lvl, string n, EnemyCategory type, enemyStatValues eSV, BigDouble xp, List<int> a)
         {
             icon = i;
             level = lvl;
             name = n;
             enemyType = type;
             enemyStats = eSV;
+            exp = xp;
+            abilities = a;
         }
     }
 
@@ -63,9 +67,13 @@ namespace EnemyReferenceTable
 
             // #0000: Debug Enemy (Debug)
             // HP: 20 | P.Attack: 1 | M.Attack: 1 | P.Defense: 0 | M.Defense: 0
+            // Abilities: 0, 1
+            List<int> abil0 = new List<int>();
+            abil0.Add(0);
+            abil0.Add(1);
             enemyInfo enemy0 = new enemyInfo(null, 1, "Debug Enemy", EnemyCategory.Debug,
-                                             new enemyStatValues(20, 1, 1, 0, 0));
-            enemyList.Add(0, enemy0);
+                                             new enemyStatValues(20, 2, 1, 0, 0), 10, abil0);
+            eL.Add(0, enemy0);
         }
     }
 }

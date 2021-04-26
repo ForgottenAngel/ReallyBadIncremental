@@ -82,6 +82,9 @@ namespace Enemy
 
         public basicStats enemyStats;
         private EnemyCategory enemyType;
+        private BigDouble exp;
+
+        public List<int> abilityList;
 
         // Constructor
         public enemyHandler()
@@ -91,6 +94,9 @@ namespace Enemy
 
             enemyStats = new basicStats();
             enemyType = EnemyCategory.Debug;
+            exp = 1;
+
+            initAbilies(out abilityList);
         }
 
         public static implicit operator enemyHandler(enemyInfo info)
@@ -105,8 +111,19 @@ namespace Enemy
             enemy.enemyStats.set(info.enemyStats.maxHP, info.enemyStats.pAttack, info.enemyStats.mAttack,
                                  info.enemyStats.pDefense, info.enemyStats.mDefense);
             enemy.enemyType = info.enemyType;
+            enemy.exp = info.exp;
+
+            enemy.abilityList = info.abilities;
 
             return enemy;
+        }
+
+        // Ability List Initializer
+        private void initAbilies(out List<int> a)
+        {
+            a = new List<int>();
+            a.Add(0);
+            a.Add(1);
         }
 
         // Getters and Setters
@@ -128,6 +145,11 @@ namespace Enemy
         public EnemyCategory _enemyType
         {
             get { return enemyType; }
+        }
+
+        public BigDouble _exp
+        {
+            get { return exp; }
         }
     }
 }
