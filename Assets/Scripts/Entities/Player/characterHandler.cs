@@ -357,6 +357,8 @@ namespace Character
         // Character Flags.
         private bool inCombat;
 
+        public Dictionary<int, int> abilityList;
+
         // Class Functions.
         // Initialization
         public characterHandler()
@@ -381,6 +383,16 @@ namespace Character
 
             // Intialize Derived Stats
             updateStats();
+
+            initAbilies(out abilityList);
+        }
+
+        // Ability List Initializer
+        private void initAbilies(out Dictionary<int, int> a)
+        {
+            a = new Dictionary<int, int>();
+            a.Add(0, 0);
+            a.Add(1, 1);
         }
 
         // Handle Player Equipment
