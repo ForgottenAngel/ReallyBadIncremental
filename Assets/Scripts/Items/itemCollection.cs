@@ -1,19 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-using UnityEngine.UI;   // Handles Image type.
-
 using ItemEnumTables;
 using BreakInfinity;
 
 using Items;
+using UnityEngine;
 
 namespace ItemReferenceTable
 {
     // Informational Struct to hold massive quantities of RO data.
     public readonly struct baseItemInfo
     {
-        public Image icon { get; }
+        public int icon { get; }
         
         public int itemID { get; }
         public ItemCategory itemCat { get; }
@@ -26,7 +25,7 @@ namespace ItemReferenceTable
         public BigDouble itemValue { get; }
 
         // Construtor.
-        public baseItemInfo(Image ico, int iID, ItemCategory ic, string name, string desc, 
+        public baseItemInfo(int ico, int iID, ItemCategory ic, string name, string desc, 
                             ItemRarityTier ir, bool sell, BigDouble val)
         {
             icon = ico;
@@ -196,7 +195,7 @@ namespace ItemReferenceTable
             // Level Req: 1 | Rarity: Debug | Unsellable | Value: 420g 
             // Heals >> HP: 110% | MP: 110%
             hItemDesc.Add("The fabled dew from the peak of the mountain. It fills you with an untold power.");
-            bHItem.Add(new baseItemInfo(null, 0, ItemCategory.Consumable, "THE Mountain Dew", hItemDesc[0], ItemRarityTier.Debug, false, 420));
+            bHItem.Add(new baseItemInfo(0, 0, ItemCategory.Consumable, "THE Mountain Dew", hItemDesc[0], ItemRarityTier.Debug, false, 420));
             hIL.Add(0, new healItemInfo(0, bHItem[0], 110, true, 110, true));
         }
 
@@ -217,10 +216,10 @@ namespace ItemReferenceTable
             // Provides >> P.Atk: 2 | M.Atk: 2 | Str: 1 | Int: 1 | Con: 1 | Wil: 1
             //          >> Crit.Rate: 10% | Hit Rate: 50% | Dodge: 10% | Block: 15%
             equipDesc.Add("A spooky unknown weapon...or so you think...");
-            bEquip.Add(new baseItemInfo(null, 0, ItemCategory.Equipment, "??? Weapon", equipDesc[0], ItemRarityTier.Debug, false, 42069));
+            bEquip.Add(new baseItemInfo(0, 0, ItemCategory.Equipment, "??? Weapon", equipDesc[0], ItemRarityTier.Debug, false, 42069));
             srEquip.Add(new statRequirements(1, 1, 1, 1));
             bsEquip.Add(new baseStats(2, 2, 0, 0, 1, 1, 1, 1));
-            ssEquip.Add(new specialStats(10f, 0f, 0, 50f, 0, 10f, 15f));
+            ssEquip.Add(new specialStats(0.10f, 0f, 0, 0.50f, 0, 0.10f, 0.15f));
             eL.Add(0, new equipItemInfo(EquipmentSlot.MainHand, 1, bEquip[0], srEquip[0], bsEquip[0], ssEquip[0]));
         }
     }

@@ -253,7 +253,7 @@ namespace Items
     public abstract class itemObject
     {
         // Basic Item Variables.
-        protected Image icon;
+        protected int icon;
 
         protected int itemID;
         protected ItemCategory itemCat;
@@ -273,7 +273,7 @@ namespace Items
         }
 
         // Common Getters and Setters
-        public Image _icon
+        public int _icon
         {
             get { return icon; }
             set { icon = value; }
@@ -334,7 +334,7 @@ namespace Items
         public equipmentItem()
         {
             // Intialize itemObject variables.
-            icon = null;
+            icon = 0;
 
             itemID = 0;
             itemCat = ItemCategory.Equipment;
@@ -484,7 +484,7 @@ namespace Items
         public healItem()
         {
             // Intialize itemObject variables.
-            icon = null;
+            icon = 0;
 
             itemID = 0;
             itemCat = ItemCategory.Consumable;
@@ -508,6 +508,17 @@ namespace Items
             hpPercentHeal = false;
             mpHealAmount = 1;
             mpPercentHeal = false;
+        }
+
+        // Copy Consturctor
+        public healItem(healItem item)
+        {
+            type = item.type;
+            levelReq = item.levelReq;
+            hpHealAmount = item.hpHealAmount;
+            hpPercentHeal = item.hpPercentHeal;
+            mpHealAmount = item.mpHealAmount;
+            mpPercentHeal = item.mpPercentHeal;
         }
 
         // Getters and Setters
