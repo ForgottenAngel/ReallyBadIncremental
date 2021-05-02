@@ -28,7 +28,7 @@ namespace EnemyReferenceTable
 
     public readonly struct enemyInfo
     {
-        public Image icon { get; }
+        public int icon { get; }
 
         public int level { get; }
         public string name { get; }
@@ -36,8 +36,10 @@ namespace EnemyReferenceTable
         public enemyStatValues enemyStats { get; }
         public BigDouble exp { get; }
         public List<int> abilities { get; }
+        public List<int> drops { get; }
 
-        public enemyInfo(Image i, int lvl, string n, EnemyCategory type, enemyStatValues eSV, BigDouble xp, List<int> a)
+        public enemyInfo(int i, int lvl, string n, EnemyCategory type, enemyStatValues eSV, BigDouble xp, 
+                         List<int> a, List<int> d)
         {
             icon = i;
             level = lvl;
@@ -46,6 +48,7 @@ namespace EnemyReferenceTable
             enemyStats = eSV;
             exp = xp;
             abilities = a;
+            drops = d;
         }
     }
 
@@ -68,11 +71,14 @@ namespace EnemyReferenceTable
             // #0000: Debug Enemy (Debug)
             // HP: 20 | P.Attack: 1 | M.Attack: 1 | P.Defense: 0 | M.Defense: 0
             // Abilities: 0, 1
+            // Drop Tables: 
             List<int> abil0 = new List<int>();
             abil0.Add(0);
             abil0.Add(1);
-            enemyInfo enemy0 = new enemyInfo(null, 1, "Debug Enemy", EnemyCategory.Debug,
-                                             new enemyStatValues(20, 2, 1, 0, 0), 10, abil0);
+            List<int> drops0 = new List<int>();
+            drops0.Add(0);
+            enemyInfo enemy0 = new enemyInfo(0, 1, "Debug Enemy", EnemyCategory.Debug,
+                                             new enemyStatValues(20, 2, 1, 0, 0), 10, abil0, drops0);
             eL.Add(0, enemy0);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 
 using UnityEngine;
 using BreakInfinity;
@@ -9,6 +10,10 @@ using Enemy;
 using EnemyReferenceTable;
 using Abilities;
 using AbilityEnumTables;
+using LootReferenceTable;
+using ItemEnumTables;
+using ItemReferenceTable;
+using Items;
 
 namespace Combat
 {
@@ -18,6 +23,8 @@ namespace Combat
         private abilitiesCollection abilities = new abilitiesCollection();
         private enemyCollection enemies = new enemyCollection();
         public enemyHandler enemy = new enemyHandler();
+        private lootTableCollection loot = new lootTableCollection();
+        private itemCollection items = new itemCollection();
 
         public combatHandler()
         {
@@ -136,6 +143,29 @@ namespace Combat
                 else
                 {
                     player.derivedStats._currHP -= dmgVal;
+                }
+            }
+        }
+
+        public void calculateDrops(enemyHandler enemy, characterHandler player)
+        {
+            // RNG To roll for drops.
+            System.Random rng = new System.Random();
+
+            // Iterate through all drop tables, and the contents of said drop tables, roll for loot.
+            for (int i = 0; i < enemy.drops.Count; ++i)
+            {
+                for (int j = 0; j < loot.dropTableList[enemy.drops[i]].Count; ++j)
+                {
+                    if (rng.NextDouble() <= loot.dropTableList[enemy.drops[i]][j].Item3)
+                    {
+                        switch (loot.dropTableList[enemy.drops[i]][j].Item1)
+                        {
+                            case ItemCategory.Equipment:
+                                player.inventory.AddEquipItem(items.equipmentList[loot.dropTableList[enemy.drops[i]][j].Item2], 0, true);
+                                break;
+                        }
+                    }
                 }
             }
         }

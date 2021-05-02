@@ -75,7 +75,7 @@ namespace Enemy
 
     public class enemyHandler
     {
-        private Image icon;
+        private int icon;
 
         private int level;
         private string name;
@@ -85,6 +85,7 @@ namespace Enemy
         private BigDouble exp;
 
         public List<int> abilityList;
+        public List<int> drops;
 
         // Constructor
         public enemyHandler()
@@ -97,6 +98,7 @@ namespace Enemy
             exp = 1;
 
             initAbilies(out abilityList);
+            initDrops(out drops);
         }
 
         public static implicit operator enemyHandler(enemyInfo info)
@@ -114,6 +116,7 @@ namespace Enemy
             enemy.exp = info.exp;
 
             enemy.abilityList = info.abilities;
+            enemy.drops = info.drops;
 
             return enemy;
         }
@@ -126,8 +129,15 @@ namespace Enemy
             a.Add(1);
         }
 
+        // Drop List Initializer
+        private void initDrops(out List<int> d)
+        {
+            d = new List<int>();
+            d.Add(0);
+        }
+
         // Getters and Setters
-        public Image _icon
+        public int _icon
         {
             get { return icon; }
         }
