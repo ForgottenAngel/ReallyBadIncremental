@@ -7,6 +7,7 @@ using Effects;
 using StatEnumTables;
 using Items;
 using ItemEnumTables;
+using Inventory;
 
 namespace Character
 {
@@ -351,8 +352,9 @@ namespace Character
         private long statPoints;
 
         // Character Inventory.
-        private BigDouble money;
+        public inventoryHandler inventory;
         private Dictionary<EquipmentSlot, equipmentItem> equipment;
+        private BigDouble money;
 
         // Character Flags.
         private bool inCombat;
@@ -378,9 +380,11 @@ namespace Character
             statPoints = 0;
 
             // Initialize Inventory
+            inventory = new inventoryHandler();
             money = 0;
             equipment = new Dictionary<EquipmentSlot, equipmentItem>();
 
+            
             // Intialize Derived Stats
             updateStats();
 
