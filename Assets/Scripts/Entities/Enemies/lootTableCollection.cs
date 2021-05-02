@@ -8,7 +8,7 @@ namespace LootReferenceTable
 {
     public class lootTableCollection
     {
-        Dictionary<int, List<Tuple<ItemCategory, int, float>>> dropTableList;
+        public Dictionary<int, List<Tuple<ItemCategory, int, float>>> dropTableList;
 
         public lootTableCollection()
         {
@@ -19,9 +19,13 @@ namespace LootReferenceTable
         {
             dTL = new Dictionary<int, List<Tuple<ItemCategory, int, float>>>();
 
+
+            // Loot Table #0000
+            // Drops >> Item 1: 25% | Item 1: 5%
             List<Tuple<ItemCategory, int, float>> table0 = new List<Tuple<ItemCategory, int, float>>();
             table0.Add(Tuple.Create(ItemCategory.Equipment, 0, 0.25f));
-            table0.Add(Tuple.Create(ItemCategory.Consumable, 0, 0.10f));
+            table0.Add(Tuple.Create(ItemCategory.Equipment, 0, 0.05f));
+            // table0.Add(Tuple.Create(ItemCategory.Consumable, 0, 0.10f));
             dTL.Add(0, table0);
         }
        
