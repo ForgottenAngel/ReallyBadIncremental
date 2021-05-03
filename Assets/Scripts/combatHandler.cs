@@ -147,7 +147,7 @@ namespace Combat
             }
         }
 
-        public void calculateDrops(enemyHandler enemy, characterHandler player)
+        public void calculateDrops(characterHandler player)
         {
             // RNG To roll for drops.
             System.Random rng = new System.Random();
