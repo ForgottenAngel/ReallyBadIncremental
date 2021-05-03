@@ -13,7 +13,9 @@ namespace sLibrary
         void Awake()
         {
             sprites = new Dictionary<int, Sprite>();
-            sprites.Add(1, Resources.Load<Sprite>("swood"));
+            sprites.Add(0, Resources.Load<Sprite>("swood"));
+
+            sprites.Add(1, Resources.Load<Sprite>("mooce"));
         }
 
     }

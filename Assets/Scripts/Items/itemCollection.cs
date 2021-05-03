@@ -221,6 +221,18 @@ namespace ItemReferenceTable
             bsEquip.Add(new baseStats(2, 2, 0, 0, 1, 1, 1, 1));
             ssEquip.Add(new specialStats(0.10f, 0f, 0, 0.50f, 0, 0.10f, 0.15f));
             eL.Add(0, new equipItemInfo(EquipmentSlot.MainHand, 1, bEquip[0], srEquip[0], bsEquip[0], ssEquip[0]));
+
+            // #0001: Skyroom Mace (Main Hand)
+            // Level Req: 1 | Rarity: Debug | Unsellable | Value: 42069g
+            // Requires >> Str: 1 | Int: 1 | Con: 1 | Wil: 1
+            // Provides >> P.Atk: 4 | M.Atk: 0 | Str: 1 | Int: 1 | Con: 1 | Wil: 1
+            //          >> Crit.Rate: 10% | Hit Rate: 50% | Dodge: 10% | Block: 15%
+            equipDesc.Add("A mace made specifically for bonking");
+            bEquip.Add(new baseItemInfo(1, 1, ItemCategory.Equipment, "Skyroom Mace", equipDesc[1], ItemRarityTier.Debug, false, 42069));
+            srEquip.Add(new statRequirements(1, 1, 1, 1));
+            bsEquip.Add(new baseStats(4, 0, 0, 0, 1, 1, 1, 1));
+            ssEquip.Add(new specialStats(0.10f, 0f, 0, 0.50f, 0, 0.10f, 0.15f));
+            eL.Add(1, new equipItemInfo(EquipmentSlot.MainHand, 1, bEquip[1], srEquip[1], bsEquip[1], ssEquip[1]));
         }
     }
 }
