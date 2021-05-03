@@ -6,10 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class sceneManager : MonoBehaviour
 {
-    void Start()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
 
     public void Scene1()
     {
