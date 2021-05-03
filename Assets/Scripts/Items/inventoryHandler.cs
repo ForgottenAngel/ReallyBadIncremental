@@ -10,7 +10,7 @@ namespace Inventory
 
     public class inventoryHandler
     {
-        private const int MAX_ITEMS = 24;
+        public const int MAX_ITEMS = 24;
         private Dictionary<int, equipmentItem> equipInv;
         private Dictionary<int, healItem> consInv;
 
@@ -23,7 +23,12 @@ namespace Inventory
         // Inventory Grabber Functions
         public equipmentItem GetEquipItem(int slot)
         {
-            return equipInv[slot];
+            if (equipInv.ContainsKey(slot))
+            {
+                return equipInv[slot];
+            }
+
+            return null;
         }
 
         public healItem GetConsumableItem(int slot)

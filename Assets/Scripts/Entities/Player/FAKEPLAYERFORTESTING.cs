@@ -15,7 +15,7 @@ public class FAKEPLAYERFORTESTING : MonoBehaviour
 
     GameObject GO;
 
-    // THE ALMIGO.GetComponent<gameHandler>()TY COPY PASTE >>> GO.GetComponent<gameHandler>()
+    // THE ALMIGHTY COPY PASTE >>> GO.GetComponent<gameHandler>()
 
     // Start is called before the first frame update
     void Awake()

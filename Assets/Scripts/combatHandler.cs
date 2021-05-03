@@ -24,7 +24,7 @@ namespace Combat
         private enemyCollection enemies = new enemyCollection();
         public enemyHandler enemy = new enemyHandler();
         private lootTableCollection loot = new lootTableCollection();
-        private itemCollection items = new itemCollection();
+        public itemCollection items = new itemCollection();
 
         public combatHandler()
         {
